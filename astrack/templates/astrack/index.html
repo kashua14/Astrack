@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Astrack Form</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="../../../static/css/lora-font.css">
+	<link rel="stylesheet" type="text/css" href="../../../static/css/raleway-font.css">
+	<link rel="stylesheet" type="text/css" href="../../../static/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+	<!-- Main Style Css -->
+    <link rel="stylesheet" href="../../../static/css/style.css"/>
+</head>
+<body class="form-v3">
+	<div class="page-content">
+		<div class="form-v3-content">
+			<form class="form-detail" action="{% url 'astrack:upload_csv' %}" method="post" id="myform" enctype="multipart/form-data">
+				{% csrf_token %}
+				<h2>AsRuTrack</h2>
+<!--				<p class="text">Please provide the necessary details below.</p>-->
+				<div class="form-group">
+					<div class="form-row">
+						<label for="file">Upload file: <i class=""></i><span id="error"></span></label>
+						<input type="file" name="file" id="file" placeholder="File must be a .csv" onchange="return fileValidation()" class="input-text" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="form-row dataset">
+						<label for="confidence">Confidence: (in %)</label>
+						<input type="number" name="confidence" placeholder="Eg. 20" id="confidence" pattern="[0-9]*" class="input-text" required>
+					</div>
+					<div class="form-row dataset">
+						<label for="periodOfDataset">Duration of Dataset: (in days)</label>
+						<input type="number" id="periodOfDataset" class="input-text" value="7" name="periodOfDataset" title="Days the dataset was collected" size="4" pattern="[0-9]*" inputmode="numeric">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="form-row">
+						<label for="freqP">Frequency of Purchase:</label>
+						<input type="number" id="freqP" value="5" class="input-text" name="freqP"  title="Number of times an item is purchased" size="4" pattern="[0-9]*" inputmode="numeric">
+					</div>
+				</div>
+				<div class="form-row-last">
+					<input type="submit" name="register" class="register" value="Submit">
+				</div>
+			</form>
+			<div class="form-right">
+				<div class="form-images-1">
+					<img src="../../../static/images/form-v3-1.jpg" alt="form-v3">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 	<script src="../../../static/js/jquery-ui.min.js"></script>
+	<script src="../../../static/js/script.js"></script>
+</body>
+</html>
