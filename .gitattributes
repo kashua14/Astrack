@@ -1,2 +1,3 @@
 static/* linguist-vendored
+staticfiles/* linguist-vendored
 *.py linguist-vendored=false
