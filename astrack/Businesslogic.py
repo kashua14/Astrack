@@ -1,4 +1,4 @@
-import numpy as np
+# import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
@@ -23,12 +23,8 @@ def business_logic(dataset, period, purchaseTimes, minC):
     association_results = list(association_rules)
 
     assocRules = []
-
     for item in association_results:
-        """first index of the inner list Contains base item and add item"""
-        pair = item[0]
-        items = [x for x in pair]
-        newRecord = [items[0], items[1], item[1], item[2][0][2], item[2][0][3]]
+        newRecord = [item[2][0][0], item[2][0][1], item[1], item[2][0][2], item[2][0][3]]
         assocRules.append(newRecord)
 
         """third index of the list located at 0th of the third index of the inner list"""

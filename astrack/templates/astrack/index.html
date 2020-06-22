@@ -12,38 +12,103 @@
 
 	<!-- Main Style Css -->
     <link rel="stylesheet" href="../../../static/css/style.css"/>
+
+	<style>
+        .loading-image{
+		  height: 100%;
+		  width: 100%;
+		  padding-top: 20px;
+		}
+
+		p{
+			margin: 0;
+			padding: 10px;
+			font-size: 20px;
+			font-weight: bold;
+			text-align: center;
+		}
+
+        /* The Modal (background) */
+		.modal {
+			  display: none;
+			  position: fixed; /* Stay in place */
+			  z-index: 1;
+			  left: 0;
+			  top: 0;
+			  width: 100%;
+			  height: 100%;
+			  background-color: rgb(0,0,0); /* Fallback color */
+			  background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+		}
+
+		/* Modal Content */
+		.modal-content {
+			  background-color: #fff;
+			  color:#000;
+			  border-radius: 10px;
+			  margin: auto;
+			  padding: 20px;
+			  position: absolute;
+			  top: 50%;
+			  left: 50%;
+			  text-align: center;
+			  transform: translate(-50%, -50%);
+			  border: 0;
+			  width: 25%;
+		}
+
+		/* The Close Button */
+		.close {
+			  color: #aaaaaa;
+			  float: right;
+			  font-size: 28px;
+			  font-weight: bold;
+		}
+
+		.close:hover,
+		.close:focus {
+			  color: #000;
+			  text-decoration: none;
+			  cursor: pointer;
+		}
+    </style>
+
 </head>
-<body class="form-v3">
+<body class="form-v3" onpagehide="closeModal()">
 	<div class="page-content">
 		<div class="form-v3-content">
-			<form class="form-detail" action="{% url 'astrack:upload_csv' %}" method="post" id="myform" enctype="multipart/form-data">
+			<form class="form-detail" action="{% url 'astrack:upload_csv' %}" method="POST" id="myform" enctype="multipart/form-data">
 				{% csrf_token %}
 				<h2>AsRuTrack</h2>
 <!--				<p class="text">Please provide the necessary details below.</p>-->
 				<div class="form-group">
 					<div class="form-row">
 						<label for="file">Upload file: <i class=""></i><span id="error"></span></label>
-						<input type="file" name="file" id="file" placeholder="File must be a .csv" onchange="return fileValidation()" class="input-text" required>
+						<input type="file" name="csv_file" id="file" placeholder="File must be a .csv" onchange="return fileValidation()" class="input-text" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="form-row dataset">
 						<label for="confidence">Confidence: (in %)</label>
-						<input type="number" name="confidence" placeholder="Eg. 20" id="confidence" pattern="[0-9]*" class="input-text" required>
+						<input type="number" name="confidence" placeholder="Eg. 20" id="confidence" pattern="[0-9]*" class="input-text" title="The likelihood that an item B is also bought if item A is bought." required>
 					</div>
 					<div class="form-row dataset">
 						<label for="periodOfDataset">Duration of Dataset: (in days)</label>
-						<input type="number" id="periodOfDataset" class="input-text" value="7" name="periodOfDataset" title="Days the dataset was collected" size="4" pattern="[0-9]*" inputmode="numeric">
+						<input type="number" id="periodOfDataset" class="input-text" value="7" name="periodOfDataset" title="For how long was the dataset collected?" size="4" pattern="[0-9]*" inputmode="numeric" required>
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="form-row">
+					<div class="form-row dataset">
 						<label for="freqP">Frequency of Purchase:</label>
-						<input type="number" id="freqP" value="5" class="input-text" name="freqP"  title="Number of times an item is purchased" size="4" pattern="[0-9]*" inputmode="numeric">
+						<input type="number" id="freqP" value="5" class="input-text" name="freqP"  title="Number of times an item is purchased" size="4" pattern="[0-9]*" inputmode="numeric" required>
+					</div>
+					<div class="form-row dataset">
+						<label for="lift1">Lift:</label>
+						<input type="number" id="lift1" value="3" class="input-text" name="lift1"  title="The likelihood of buying products A and B together" size="4" pattern="[0-9]*" inputmode="numeric" required>
 					</div>
 				</div>
 				<div class="form-row-last">
-					<input type="submit" name="register" class="register" value="Submit">
+					<input type="submit" name="register" class="register" value="Submit" onclick="showModal()">
 				</div>
 			</form>
 			<div class="form-right">
@@ -52,7 +117,23 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- The Modal -->
+		<div id="myModal" class="modal">
+
+			  <!-- Modal content -->
+			<div class="modal-content">
+<!--				<span class="close" onclick="closeModal()">&times;</span>-->
+				<img class ="loading-image" src="../../../static/images/01-progress.gif">
+				This may take a few minutes.
+				<p>Please wait...</p>
+			</div>
+
+		</div>
 	</div>
+
+
+	<script src="../../../static/js/popup.js"></script>
 	<!-- Jquery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  	<script src="../../../static/js/jquery-ui.min.js"></script>

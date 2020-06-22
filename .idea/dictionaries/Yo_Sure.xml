@@ -1,10 +1,15 @@
 <component name="ProjectDictionaryState">
   <dictionary name="Yo Sure">
     <words>
+      <w>apriori</w>
       <w>astrack</w>
       <w>dataframe</w>
       <w>dataset</w>
+      <w>figsize</w>
       <w>heatmap</w>
+      <w>pretuple</w>
+      <w>xlsx</w>
+      <w>xlsxwriter</w>
     </words>
   </dictionary>
 </component>
