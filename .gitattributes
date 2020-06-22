@@ -1,5 +1,5 @@
 project-docs/* linguist-documentation
 
 special-vendored-path/* linguist-vendored
-*.js -linguist-vendored
+*.py -linguist-vendored
 *.css -linguist-vendored
