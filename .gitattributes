@@ -1,4 +1,2 @@
-project-docs/* linguist-documentation
-
-special-vendored-path/* linguist-vendored
-*.py -linguist-vendored
+* linguist-vendored
+*.py linguist-vendored=false
