@@ -5,4 +5,4 @@ apyori==1.1.2
 seaborn==0.10.1
 pandas==1.0.5
 matplotlib==3.2.2
-django==3.0.7
+django==3.1.13
